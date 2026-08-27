@@ -1,0 +1,727 @@
+{
+  "description": "Регрессионные проверки линтера. cases — фразы с ожидаемыми кодами; corpus — тексты целиком с ожидаемой полосой оценки. Живые тексты обязаны проходить чисто: ложное срабатывание дороже пропуска. human/habr/ — 16 статей автора проекта (Хабр, 2022–2026): на них линтер калиброван так, чтобы не принимать голос за дефект.",
+  "cases": [
+    {
+      "id": "artifact-oaicite",
+      "genre": "auto",
+      "text": "Продажи выросли на 12% :contentReference[oaicite:2]{index=2} по данным отчёта.",
+      "must": [
+        "A-oaicite"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "artifact-in-code-is-quote",
+      "genre": "auto",
+      "text": "Линтер ловит метки вроде `turn0search3` и `[cite: 8]` в тексте после ChatGPT.",
+      "must": [],
+      "must_not": [
+        "A-turn",
+        "A-gemini"
+      ]
+    },
+    {
+      "id": "chat-wrapper",
+      "genre": "post",
+      "text": "Конечно! Вот улучшенный вариант поста:\n\nОбновили УТ до 11.5.\n\nЕсли у вас есть вопросы — обращайтесь!",
+      "must": [
+        "chat-intro",
+        "chat-outro"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "placeholder",
+      "genre": "letter",
+      "text": "Готовы приступить к доработке [укажите дату] после согласования сметы.",
+      "must": [
+        "A-placeholder"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "intro-empty-1c",
+      "genre": "article",
+      "text": "В эпоху цифровой трансформации учёт в 1С является неотъемлемой частью любого бизнеса.",
+      "must": [
+        "intro-empty",
+        "importance"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "announce-article",
+      "genre": "article",
+      "text": "В этой статье мы рассмотрим, как работает механизм блокировок.",
+      "must": [
+        "announce"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "transition-doc",
+      "genre": "doc",
+      "text": "Следует отметить, что обмен запускается регламентным заданием раз в час.",
+      "must": [
+        "transition-empty"
+      ],
+      "must_not": [
+        "bureau-verb"
+      ]
+    },
+    {
+      "id": "obratite-vnimanie-ok",
+      "genre": "doc",
+      "text": "Обратите внимание: после обновления нужно перезапустить регламентные задания.",
+      "must": [],
+      "must_not": [
+        "transition-empty"
+      ]
+    },
+    {
+      "id": "summary-empty-1c",
+      "genre": "article",
+      "text": "В заключение отметим, что переход на расширения выводит сопровождение типовой на новый уровень.",
+      "must": [
+        "summary-empty"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "weasel",
+      "genre": "article",
+      "text": "Исследования показывают, что большинство внедрений ERP срывают сроки.",
+      "must": [
+        "weasel"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "practice-shows-low",
+      "genre": "article",
+      "text": "Как показывает практика, обмен через веб-сервис стабильнее файлового.",
+      "must": [
+        "weasel-weak"
+      ],
+      "must_not": [
+        "weasel"
+      ]
+    },
+    {
+      "id": "contrast-formula",
+      "genre": "post",
+      "text": "Расширение — это не просто способ доработки, а стратегия сопровождения.",
+      "must": [
+        "contrast"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "ne-prosto-tak-ok",
+      "genre": "post",
+      "text": "Регламентник не просто так падает по ночам: в это время идёт бэкап.",
+      "must": [],
+      "must_not": [
+        "contrast"
+      ]
+    },
+    {
+      "id": "bureau-1c",
+      "genre": "article",
+      "text": "Данный функционал предоставляет возможность осуществления контроля остатков посредством регистра накопления.",
+      "must": [
+        "bureau-word",
+        "bureau-verb",
+        "bureau-prep"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "term-provedenie-ok",
+      "genre": "article",
+      "text": "Обработка проведения формирует движения по регистру накопления и проверяет остатки.",
+      "must": [],
+      "must_not": [
+        "bureau-verb",
+        "passive",
+        "copula"
+      ]
+    },
+    {
+      "id": "term-reglament-ok",
+      "genre": "doc",
+      "text": "Регламентное задание «Обмен данными с сайтом» запускает выгрузку остатков каждые 15 минут.",
+      "must": [],
+      "must_not": [
+        "bureau-verb",
+        "bureau-word"
+      ]
+    },
+    {
+      "id": "dannye-noun-ok",
+      "genre": "doc",
+      "text": "По данным регистра остатки сошлись. Данные выгружаются в JSON, затем обработка данных идёт на стороне сайта.",
+      "must": [],
+      "must_not": [
+        "bureau-word"
+      ]
+    },
+    {
+      "id": "dannyj-adjective",
+      "genre": "article",
+      "text": "Данный подход работает только в файловой базе.",
+      "must": [
+        "bureau-word"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "copula",
+      "genre": "article",
+      "text": "Регистр сведений является основным хранилищем настроек и представляет собой таблицу.",
+      "must": [
+        "copula"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "passive-nami",
+      "genre": "letter",
+      "text": "Нами было реализовано более 340 доработок, было принято решение о переходе на расширения.",
+      "must": [
+        "passive"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "passive-state-ok",
+      "genre": "doc",
+      "text": "Документ проведён, база заблокирована на время обмена, выгрузка выполнена.",
+      "must": [],
+      "must_not": [
+        "passive"
+      ]
+    },
+    {
+      "id": "marketing",
+      "genre": "letter",
+      "text": "Мы — ведущий разработчик инновационных решений с индивидуальным подходом к каждому клиенту.",
+      "must": [
+        "marketing"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "kompleksnaya-avtomatizaciya-ok",
+      "genre": "article",
+      "text": "Комплексная автоматизация 2.5 умеет считать себестоимость по РАУЗ.",
+      "must": [],
+      "must_not": [
+        "marketing"
+      ]
+    },
+    {
+      "id": "spec-mutes-bureau",
+      "genre": "spec",
+      "text": "Исполнитель осуществляет доработку в целях обеспечения корректности расчёта. Данный документ является обязательным для сторон.",
+      "must": [],
+      "must_not": [
+        "bureau-verb",
+        "bureau-prep",
+        "bureau-word",
+        "copula"
+      ]
+    },
+    {
+      "id": "spec-keeps-cliche",
+      "genre": "spec",
+      "text": "В современном мире исполнитель осуществляет доработку в целях обеспечения корректности расчёта.",
+      "must": [
+        "intro-empty"
+      ],
+      "must_not": [
+        "bureau-verb"
+      ]
+    },
+    {
+      "id": "em-dash-not-flagged",
+      "genre": "article",
+      "text": "Регистр — это таблица. Обмен — раз в час. Тире — обычная пунктуация, и ставить его — не преступление.",
+      "must": [],
+      "must_not": [
+        "em-dash",
+        "aphorism",
+        "drama",
+        "contrast"
+      ]
+    },
+    {
+      "id": "aphorism-language-ok",
+      "genre": "article",
+      "text": "1С — это язык программирования с русским синтаксисом, и SQL — это язык запросов.",
+      "must": [],
+      "must_not": [
+        "aphorism"
+      ]
+    },
+    {
+      "id": "aphorism",
+      "genre": "post",
+      "text": "Данные — новая нефть.",
+      "must": [
+        "aphorism"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "drama",
+      "genre": "post",
+      "text": "Обновили типовую. Без снятия с поддержки. Без потери доработок. Только результат.",
+      "must": [
+        "drama"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "hedge-cascade",
+      "genre": "article",
+      "text": "Возможно, в некоторых случаях обмен, скорее всего, обычно отработает.",
+      "must": [
+        "hedge"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "hedge-single-ok",
+      "genre": "article",
+      "text": "Возможно, обмен отработает.",
+      "must": [],
+      "must_not": [
+        "hedge"
+      ]
+    },
+    {
+      "id": "quote-untouched",
+      "genre": "article",
+      "text": "> В современном мире данный подход является ключевым.\n\nТак написано в ТЗ заказчика, и мы это не трогали.",
+      "must": [],
+      "must_not": [
+        "intro-empty",
+        "bureau-word",
+        "copula"
+      ]
+    },
+    {
+      "id": "truncated",
+      "genre": "article",
+      "text": "Обмен настроен и работает. Теперь регламентное задание выгружает остатки каждые пять минут, а",
+      "must": [
+        "truncated"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "list-ending-ok",
+      "genre": "doc",
+      "text": "Порядок действий:\n\n1. Откройте план обмена\n2. Нажмите «Выполнить обмен»",
+      "must": [],
+      "must_not": [
+        "truncated"
+      ]
+    },
+    {
+      "id": "therapy",
+      "genre": "post",
+      "text": "Не все успевают за релизами платформы. И это нормально. Вы не одиноки.",
+      "must": [
+        "therapy"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "colon-reveal",
+      "genre": "post",
+      "text": "Самое интересное: обмен падал из-за одной запятой в JSON.",
+      "must": [
+        "colon-reveal"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "colon-list-ok",
+      "genre": "doc",
+      "text": "Нужны три вещи: логин, пароль и адрес базы.",
+      "must": [],
+      "must_not": [
+        "colon-reveal"
+      ]
+    },
+    {
+      "id": "calque",
+      "genre": "letter",
+      "text": "Команда адресовала проблему и на еженедельной основе доставляет ценность.",
+      "must": [
+        "calque"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "paragraph-stack",
+      "genre": "article",
+      "text": "Обмен идёт раз в час и обычно укладывается в минуту.\n\nКроме того, есть ручной запуск из формы узла.\n\nТакже можно запустить обмен из консоли регламентных заданий.\n\nБолее того, обмен умеет догонять пропущенные интервалы.",
+      "must": [
+        "paragraph-stack"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "sycophancy",
+      "genre": "post",
+      "text": "Отличный вопрос! Регламентное задание запускается по расписанию.",
+      "must": [
+        "sycophancy"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "needs-data-is-note-not-error",
+      "genre": "article",
+      "text": "Отчёт строится быстро. [нужны данные: сколько секунд на 2 млн строк?]",
+      "must": [
+        "needs-data"
+      ],
+      "must_not": [
+        "A-placeholder"
+      ]
+    },
+    {
+      "id": "placeholder-short",
+      "genre": "letter",
+      "text": "Смета составит [сумма] рублей, срок — [укажите срок].",
+      "must": [
+        "A-placeholder"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "is-density",
+      "genre": "article",
+      "text": "Справочник является объектом конфигурации. Документ является объектом конфигурации. Регистр является хранилищем. Отчёт является объектом. План обмена является объектом.",
+      "must": [
+        "is-density"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "unfinished-is-note",
+      "genre": "article",
+      "text": "Обмен настроен и работает. Теперь регламентное задание выгружает остатки каждые пять минут",
+      "must": [
+        "unfinished"
+      ],
+      "must_not": [
+        "truncated"
+      ]
+    },
+    {
+      "id": "cta-with-link-not-truncated",
+      "genre": "article",
+      "text": "На этом у меня всё. Не пишите код руками. Ну и да, подписывайтесь на мой канал https://t.me/example",
+      "must": [],
+      "must_not": [
+        "truncated",
+        "unfinished"
+      ]
+    },
+    {
+      "id": "sign-off-not-truncated",
+      "genre": "article",
+      "text": "Как минимум посмотрите актуальный бенчмарк, если ещё не видели.\nИ до новых встреч в эфире",
+      "must": [],
+      "must_not": [
+        "truncated"
+      ]
+    },
+    {
+      "id": "announce-davajte-is-weak",
+      "genre": "article",
+      "text": "Давайте разберём пример из документации. Кстати, классический.",
+      "must": [
+        "announce-weak"
+      ],
+      "must_not": [
+        "announce"
+      ]
+    },
+    {
+      "id": "transition-ponimat-is-weak",
+      "genre": "article",
+      "text": "Кажется, это все ограничения, но нужно понимать, что для OnPremise список будет другим.",
+      "must": [
+        "transition-weak"
+      ],
+      "must_not": [
+        "transition-empty"
+      ]
+    },
+    {
+      "id": "v-dannom-sluchae-ok",
+      "genre": "article",
+      "text": "В данном случае мы имеем дело с транзакционным постгресом, и на данный момент это устраивает.",
+      "must": [],
+      "must_not": [
+        "bureau-word"
+      ]
+    },
+    {
+      "id": "iz-unikalnogo-ok",
+      "genre": "article",
+      "text": "Ещё из уникального — есть отдельное логирование, оплата криптой, собственный кэш.",
+      "must": [],
+      "must_not": [
+        "marketing"
+      ]
+    },
+    {
+      "id": "prekrasnaya-mysl-author-ok",
+      "genre": "article",
+      "text": "Если вы не привязаны к какому-либо агенту или IDE — прекрасная мысль попробовать сразу Kiro.",
+      "must": [],
+      "must_not": [
+        "sycophancy"
+      ]
+    },
+    {
+      "id": "sovremennyj-mir-mid-sentence-ok",
+      "genre": "article",
+      "text": "Слово «вайбкодинг» в современном мире прижилось плотно, но у разработчиков вызывает рвотный рефлекс.",
+      "must": [],
+      "must_not": [
+        "intro-empty"
+      ]
+    },
+    {
+      "id": "itak-pristupim-ok",
+      "genre": "article",
+      "text": "Итак, приступим: первая задача — сортировка пузырьком. В итоге, получилось неплохо.",
+      "must": [],
+      "must_not": [
+        "summary-weak"
+      ]
+    },
+    {
+      "id": "filler-is-note",
+      "genre": "article",
+      "text": "По сути это отбор всех нод по связям с меткой PARENT. В любом случае, знать об этом нужно.",
+      "must": [
+        "filler"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "labels-not-parcellation",
+      "genre": "article",
+      "text": "Задача 2:\n> Создай таблицу значений.\n\nЗадача 3:\n> Напиши запрос.\n\nЗадача 3.1:\n> Ещё запрос.\n\nЗадача 4:\n> И ещё один.",
+      "must": [],
+      "must_not": [
+        "parcellation",
+        "drama"
+      ]
+    },
+    {
+      "id": "dialogue-not-parcellation",
+      "genre": "article",
+      "text": "«— Скажите, куда мне отсюда идти?\n— А куда ты хочешь попасть? — ответил Кот.\n— Мне всё равно… — сказала Алиса.\n— Тогда всё равно куда и идти, — заметил Кот.»\nКаждый продакт знает наизусть этот отрывок.",
+      "must": [],
+      "must_not": [
+        "parcellation"
+      ]
+    },
+    {
+      "id": "ellipsis-pause-not-parcellation",
+      "genre": "article",
+      "text": "GPT - получает 4-ку... не разобрался\nClaude - тоже 4-ка... ближе, но куча лишнего кода\nGemini написал нормальный код - 9ка",
+      "must": [],
+      "must_not": [
+        "parcellation"
+      ]
+    },
+    {
+      "id": "wall-article-threshold",
+      "genre": "article",
+      "text": "Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль.",
+      "must": [],
+      "must_not": [
+        "wall"
+      ]
+    },
+    {
+      "id": "wall-auto-threshold",
+      "genre": "auto",
+      "text": "Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль. Абзац на Хабре часто тянется на полторы сотни слов, и это одна мысль.",
+      "must": [
+        "wall"
+      ],
+      "must_not": []
+    }
+  ],
+  "corpus": [
+    {
+      "file": "human/post-update-ut.txt",
+      "genre": "post",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/doc-exchange-setup.txt",
+      "genre": "doc",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/letter-customer.txt",
+      "genre": "letter",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/article-skd.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/article-autotests.txt",
+      "genre": "auto",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/spec-fragment.txt",
+      "genre": "spec",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "ai/article-autotests.txt",
+      "genre": "auto",
+      "kind": "ai",
+      "max_score": 59
+    },
+    {
+      "file": "ai/article-1c-automation.txt",
+      "genre": "article",
+      "kind": "ai",
+      "max_score": 59
+    },
+    {
+      "file": "ai/about-company.txt",
+      "genre": "letter",
+      "kind": "ai",
+      "max_score": 59
+    },
+    {
+      "file": "ai/chat-wrapped.txt",
+      "genre": "post",
+      "kind": "ai",
+      "max_score": 59,
+      "errors_min": 1
+    },
+    {
+      "file": "human/habr/2022-08-02-postgres-yandex-cloud.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 70
+    },
+    {
+      "file": "human/habr/2025-04-04-neo4j-graph-db.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 80
+    },
+    {
+      "file": "human/habr/2025-04-07-9-rules-from-it.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/habr/2025-05-10-vibecoding-1c-part1.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/habr/2025-05-27-vibecoding-1c-part2.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/habr/2025-07-02-ai-stack-for-1c.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 90
+    },
+    {
+      "file": "human/habr/2025-08-22-vibecoding-1c-part3.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/habr/2025-09-30-vibecoding-1c-part4.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/habr/2025-11-18-vibecoding-1c-part5.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 90
+    },
+    {
+      "file": "human/habr/2025-11-28-vibecoding-1c-part6.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/habr/2025-12-10-agentic-ide-comparison.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 90
+    },
+    {
+      "file": "human/habr/2025-12-27-ai-ecosystem-1c-survey.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 80
+    },
+    {
+      "file": "human/habr/2026-01-16-sdd-frameworks.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 85
+    },
+    {
+      "file": "human/habr/2026-06-08-token-economy-12-ways.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 80
+    },
+    {
+      "file": "human/habr/2026-07-26-openrouter-alternatives-ru.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 90
+    },
+    {
+      "file": "human/habr/2026-07-27-llm-bench-1c-v2.txt",
+      "genre": "article",
+      "kind": "human",
+      "min_score": 85
+    }
+  ]
+}

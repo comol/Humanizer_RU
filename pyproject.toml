@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "humanizer-ru"
+version = "0.3.0"
+description = "Линтер читаемости русского текста после нейросети + скилл-редактор для LLM-агентов. Читатель, а не детектор."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+keywords = ["russian", "editing", "readability", "ai-text", "1c", "linter"]
+dependencies = []
+
+[project.optional-dependencies]
+morph = ["pymorphy3>=2.0"]
+test = ["pytest>=7"]
+
+[project.scripts]
+humanizer-ru = "humanizer_ru.cli:main"
+
+[tool.setuptools]
+packages = ["humanizer_ru"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
